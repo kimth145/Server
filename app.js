@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const { Client } = require('pg')
-const dbInfo = {} //require('../DB/dbInfo')
+// const dbInfo = require('../DB/dbInfo')
 const path = require('path')
 
 app.use(cors())
@@ -12,6 +12,14 @@ app.use(express.urlencoded({extended:false}))
 
 app.use(express.static(path.join(__dirname, '/../Client')));
 
+const dbInfo = {
+    user:'jplnhhfgxphecr'
+    ,password:'8792b1ff10cc1a9c8212f9e9ca12f7b19c77dd9d598dde0ba68f0f6721bc9538'
+    ,port:5432
+    ,host:'ec2-54-85-56-210.compute-1.amazonaws.com'
+    ,database:'d7rotn3tabf5md'
+    ,ssl:{rejectUnauthorized:false}
+}
 
 // const dbInfo = {
 //     // user:'postgres'
