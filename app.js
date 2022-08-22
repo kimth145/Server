@@ -13,11 +13,11 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname, '/../Client')));
 
 const dbInfo = {
-    user:'postgresql'
-    ,password:'postgresql'
-    ,port:8080
-    ,host:'https://admin-postgresql-48f224l74cbxdz.gksl1.cloudtype.app'
-    ,database:'postgresql'
+    user:'qsrpsmmjotbejk'
+    ,password:'9218ba867803bf0ede87ccc6e98101fa80a9333a3bfe8c9154ac278464df80de'
+    ,port:5432
+    ,host:'ec2-44-205-63-142.compute-1.amazonaws.com'
+    ,database:'d5fqtot7lqlj77'
     ,ssl:{rejectUnauthorized:false}
 }
 
@@ -50,12 +50,16 @@ app.get('/jap',(req, res)=>{
     res.send('おはよう！')
 })
 
+app.get('/fra',(req, res)=>{
+    res.send('Bonjur')
+})
+
 app.get('/language_all/', (req, res)=>{
     const client = new Client(dbInfo)
     client.connect().catch(err=>{console.log(err)})
-    // client.query('SELECT language, msg FROM public."Language"',(err, result)=>{
-    //     res.send(result.rows)
-    // })
+    client.query('SELECT language, msg FROM public."Language"',(err, result)=>{
+        res.send(result.rows)
+    })
 })
 
 // app.get('/', (req, res)=>{
