@@ -13,26 +13,26 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname, '/../Client')));
 
 const dbInfo = {
-    user:'jplnhhfgxphecr'
-    ,password:'8792b1ff10cc1a9c8212f9e9ca12f7b19c77dd9d598dde0ba68f0f6721bc9538'
+    user:'qsrpsmmjotbejk'
+    ,password:'9218ba867803bf0ede87ccc6e98101fa80a9333a3bfe8c9154ac278464df80de'
     ,port:5432
-    ,host:'ec2-54-85-56-210.compute-1.amazonaws.com'
-    ,database:'d7rotn3tabf5md'
+    ,host:'ec2-44-205-63-142.compute-1.amazonaws.com'
+    ,database:'d5fqtot7lqlj77'
     ,ssl:{rejectUnauthorized:false}
 }
 
 // const dbInfo = {
-//     // user:'postgres'
-//     // ,password:'1234'
-//     // ,port:5432
-//     // ,host:'localhost'
-//     // ,database:'Test_0802'
-//     user:'nehaykdmqxlidc'
-//     ,password:'9f01308cdeeffbf952b6dd8cad1840bfcb5b783d8401cdab3dd4172b65786196'
+//     user:'postgres'
+//     ,password:'1234'
 //     ,port:5432
-//     ,host:'ec2-44-206-214-233.compute-1.amazonaws.com'
-//     ,database:'df3rg6gaiclics'
-//     ,ssl:{rejectUnauthorized:false}
+//     ,host:'localhost'
+//     ,database:'Test_0802'
+//     // user:'nehaykdmqxlidc'
+//     // ,password:'9f01308cdeeffbf952b6dd8cad1840bfcb5b783d8401cdab3dd4172b65786196'
+//     // ,port:5432
+//     // ,host:'ec2-44-206-214-233.compute-1.amazonaws.com'
+//     // ,database:'df3rg6gaiclics'
+//     // ,ssl:{rejectUnauthorized:false}
 // }
 app.get('/',(req, res)=>{
     res.send('Success!')
@@ -69,19 +69,20 @@ app.get('/language_all/', (req, res)=>{
 // })
 
 app.get('/language/:lan', (req, res)=>{
-    console.log('aaa',req.params.lan)
-    // const lan = req.params.lan
-    // const client = new Client(dbInfo)
-    // client.connect()
-    // client.query('SELECT language, msg FROM public."Language" WHERE language = $1',[lan],(err, result)=>{
-    //     res.send(result.rows)
-    // })
+    const lan = req.params.lan
+    const client = new Client(dbInfo)
+    client.connect()
+    client.query('SELECT language, msg FROM public."Language" WHERE language = $1',[lan],(err, result)=>{
+        res.send(result.rows)
+    })
 })
 
 app.post('/reg', (req, res)=>{
 
     const lan = req.body.lan
     const msg = req.body.msg
+
+    console.log('INSERT INTO public."Language" VALUES ($1 ,$2)', lan, msg)
 
     const client = new Client(dbInfo)
     client.connect()
