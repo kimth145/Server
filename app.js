@@ -50,9 +50,9 @@ app.get('/jap',(req, res)=>{
     res.send('おはよう！')
 })
 
-// app.get('/fra',(req, res)=>{
-//     res.send('Bonjur')
-// })
+app.get('/fra',(req, res)=>{
+    res.send('Bonjur')
+})
 
 app.get('/language_all/', (req, res)=>{
     const client = new Client(dbInfo)
